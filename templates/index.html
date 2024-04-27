@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subdomain Finder</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Subdomain Finder</h1>
+        <form method="post" id="domain-form">
+            <label for="domain">Enter Domain:</label>
+            <input type="text" id="domain" name="domain" required>
+            <button type="submit" id="submit-button">Find Subdomains</button>
+        </form>
+
+        <div id="result-container" style="display: none;">
+            <h1 id="result-heading">Subdomains found:</h1>
+            <ul id="subdomain-list"></ul>
+            <div class="result-button-container">
+                <button type="button" id="reset-button">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("domain-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var domain = document.getElementById("domain").value;
+            // Here, you would perform AJAX request to fetch subdomains
+            // Once you receive subdomains, update the DOM accordingly
+            // For demonstration, I'll simulate fetching subdomains
+            var subdomains = ["sub1.example.com", "sub2.example.com", "sub3.example.com"];
+            displayResult(domain, subdomains);
+        });
+
+        function displayResult(domain, subdomains) {
+            document.getElementById("result-heading").textContent = "Subdomains found for " + domain + ":";
+            var subdomainList = document.getElementById("subdomain-list");
+            subdomainList.innerHTML = "";
+            subdomains.forEach(function(subdomain) {
+                var listItem = document.createElement("li");
+                listItem.textContent = subdomain;
+                subdomainList.appendChild(listItem);
+            });
+            document.getElementById("result-container").style.display = "block";
+        }
+
+        document.getElementById("reset-button").addEventListener("click", function() {
+            document.getElementById("domain").value = "";
+            document.getElementById("result-container").style.display = "none";
+        });
+    </script>
+</body>
+</html>
